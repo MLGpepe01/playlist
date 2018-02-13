@@ -22,24 +22,30 @@ var mySong = {
 	mp3url:"https://www.youtube.com/watch?v=85YIezL8Q9A",
 	imageurl:"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
 }
+var mySongDeux = {
+	title:"Who Shot Ya?",
+	artist:"Notorious BIG",
+	mp3url:"https://www.youtube.com/watch?v=85YIezL8Q9A",
+	imageurl:"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
+}
 
 var myPlayList = [
 	{
 		"title":"24K Magic",
 		"artist":"Bruno Mars",
-		"mp3-url":"https://open.spotify.com/track/6b8Be6ljOzmkOmFslEb23P",
+		"mp3url":"https://open.spotify.com/track/6b8Be6ljOzmkOmFslEb23P",
 		"image-url":"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
 	},
 	{
 		"title":"Sir Duke",
 		"artist":"Stevie Wonder",
-		"mp3-url":"https://open.spotify.com/track/2udw7RDkldLFIPG9WYdVtT",
+		"mp3url":"https://open.spotify.com/track/2udw7RDkldLFIPG9WYdVtT",
 		"image-url":"https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Songs_in_the_key_of_life.jpg/220px-Songs_in_the_key_of_life.jpg",
 	},
 	{
 		"title":"Sorry",
 		"artist":"Justin Bieber",
-		"mp3-url":"https://open.spotify.com/track/09CtPGIpYB4BrO8qb1RGsF",
+		"mp3url":"https://open.spotify.com/track/09CtPGIpYB4BrO8qb1RGsF",
 		"image-url":"http://assets-s3.usmagazine.com/uploads/assets/articles/93827-justin-biebers-sorry-choreographer-spills-video-style-secrets-parris-goebel/1445638548_justin-bieber-sorry-dancers-zoom.jpg",
 	}
 
@@ -50,17 +56,32 @@ var myPlayList = [
 // DOCUMENT READY FUNCTION
 $( document ).ready(function() {
   
-displayList();
 
+
+
+
+$("#1").click(function(){
+	x=myPlayList[0]
+    displayList(mySong)
+
+});
+$("#2").click(function(){
+	x=myPlayList[1]
+	displayList("mySongDeux")
+});
+$("#3").click(function(){
+	var x=myPlayList[2]
+	displayList("");
+});
 
 });
 
-function displayList(){
+function displayList(x){
 
-$(".songs").append("<p>Song Title: " + mySong.title + "</p>")
-$(".songs").append("<p>Artist: " + mySong.artist + "</p>")
-$(".songs").append("<p>Link: " + mySong.mp3url + "</p>")
-$(".songs").append("<p>Image: " + <img src ="mySong.imageurl"></img> + "</p>")
+	$(".songs").append("<p>Song Title: " + x.title + "</p>")
+	$(".songs").append("<p>Artist: " + x.artist + "</p>")
+	$(".songs").append("<p>Link: " + x.mp3url + "</p>")
+
   
 }
 
@@ -75,3 +96,14 @@ function addSong(){
   
   
 }
+ 
+$("#submit").click(function() {
+    var newSong = {
+        title: $("#title").val(),
+        artist: $("#artist").val(),
+        Play_link: $("#play-link").val(),
+        album_image:$("#submit").val(),
+    
+    };
+    $(".songs").append(newSong);
+});
