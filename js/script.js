@@ -1,109 +1,82 @@
-// quick fix for Cloud9 warning:
-/* global $ */
+$(document).ready(function() {
 
-// Class 2:
-// Complete displayList() to show a single song in the list
+	console.log(myPlayList);
 
-// Class 2:
-// Complete displayList() to show all the songs in the list
-// Complete clearList() funcion
+	displaySongs(myPlayList)
 
-// Class 3:
-// Complete the addSong function to take an input from input boxes and push a new song to the playlist array. 
 
-// *************************** YOUR CODE BELOW *******************************
-//******************TEST EARLY AND OFTEN USING console.log() ******************
-//****************** SERIOUSLY TEST USING console.log()!!! ******************
 
-// Songs
-var mySong = {
-	title:"Ten Crack Commandments",
-	artist:"Notorious BIG",
-	mp3url:"https://www.youtube.com/watch?v=85YIezL8Q9A",
-	imageurl:"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
-}
-var mySongDeux = {
-	title:"Who Shot Ya?",
-	artist:"Notorious BIG",
-	mp3url:"https://www.youtube.com/watch?v=85YIezL8Q9A",
-	imageurl:"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
-}
-
-var myPlayList = [
-	{
-		"title":"24K Magic",
-		"artist":"Bruno Mars",
-		"mp3url":"https://open.spotify.com/track/6b8Be6ljOzmkOmFslEb23P",
-		"image-url":"https://images-na.ssl-images-amazon.com/images/I/71Gr9aCHQfL._SY355_.jpg",
-	},
-	{
-		"title":"Sir Duke",
-		"artist":"Stevie Wonder",
-		"mp3url":"https://open.spotify.com/track/2udw7RDkldLFIPG9WYdVtT",
-		"image-url":"https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Songs_in_the_key_of_life.jpg/220px-Songs_in_the_key_of_life.jpg",
-	},
-	{
-		"title":"Sorry",
-		"artist":"Justin Bieber",
-		"mp3url":"https://open.spotify.com/track/09CtPGIpYB4BrO8qb1RGsF",
-		"image-url":"http://assets-s3.usmagazine.com/uploads/assets/articles/93827-justin-biebers-sorry-choreographer-spills-video-style-secrets-parris-goebel/1445638548_justin-bieber-sorry-dancers-zoom.jpg",
+	//READ All
+	function displaySongs(songs){
+		clearAllSongs()
+		for(var i = 0; i < songs.length; i++){	
+			$(".result-text").append(
+			'<div id="' + i + '">\
+				<div class="col-md-8" id="info">\
+					<h3 id="title">' + songs[i]["title"] + '</h3>\
+					<a href=' + songs[i]["mp3-url"] + '> Listen </a>\
+				</div>\
+				<div class="col-md-4" >\
+					<img src=' + songs[i]["image-url"] + '>\
+					<span class="glyphicon glyphicon-remove delete" id="' + i + '"></span>\
+					<span class="glyphicon glyphicon-edit update" id="' + i + '"></span>\
+				</div>\
+				<div class="col-md-12"><hr></div>\
+			</div>'
+			);
+	   	}
 	}
 
-]
+	//CREATE
+	function createSong(){
+		var newSong = {
+			"title": $('#titleInput').val(),
+			"artist": $('#artistInput').val(),
+			"length": $('#lengthInput').val(),
+			"releaseDate": $('#releaseDateInput').val(),
+			"mp3Url": $('#mp3UrlInput').val(),
+			"imageUrl": $('#imageUrlInput').val(),
+			"genres":[
+				$('#titleInput').val()
+			]
+		}
+		myPlayList.push(newSong);
+	}
+
+	$("#createSong").click(function(){
+
+		createSong();
+		displaySongs(myPlayList)
+
+	});
+
+
+	//UPDATE
+
+
+	// $('body').on('click', '.update', function() {
+ //    	var id = $(this).attr('id');
+ //    	console.log(id);
+ //    	updateSong(id);
+	// });
+
+	//DELETE
+	function deleteSong(id){
+		myPlayList.splice(id, 1);
+		displaySongs(myPlayList)
+	}
+
+	$('body').on('click', '.delete', function() {
+    	var id = $(this).attr('id');
+    	console.log(id);
+    	deleteSong(id);
+	});
+
+	//DESTROY
+	function clearAllSongs(){
+		$('.result-text').empty();
+	}
 
 
 
-// DOCUMENT READY FUNCTION
-$( document ).ready(function() {
-  
-
-
-
-
-$("#1").click(function(){
-	x=myPlayList[0]
-    displayList(mySong)
-
-});
-$("#2").click(function(){
-	x=myPlayList[1]
-	displayList("mySongDeux")
-});
-$("#3").click(function(){
-	var x=myPlayList[2]
-	displayList("");
-});
-
-});
-
-function displayList(x){
-
-	$(".songs").append("<p>Song Title: " + x.title + "</p>")
-	$(".songs").append("<p>Artist: " + x.artist + "</p>")
-	$(".songs").append("<p>Link: " + x.mp3url + "</p>")
-
-  
-}
-
-function clearList(){
-  
-  
-  
-}
-
-function addSong(){
- 
-  
-  
-}
- 
-$("#submit").click(function() {
-    var newSong = {
-        title: $("#title").val(),
-        artist: $("#artist").val(),
-        Play_link: $("#play-link").val(),
-        album_image:$("#submit").val(),
-    
-    };
-    $(".songs").append(newSong);
 });
